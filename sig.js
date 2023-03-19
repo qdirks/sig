@@ -23,7 +23,7 @@ function sig(ignored=[]) {
     const signalName = filename + "." + baseSignal + num + ".js";
 
     // create the chokidar watcher
-    const watcher = chokidar.watch(directory, {ignored: [clientName, signalName].concat(ignored)});
+    const watcher = chokidar.watch(directory, {ignored: [clientName, signalName, ".git", "node_modules"].concat(ignored)});
     let eventCount = 0;
     const changes = {add: 0, addDir: 0, all: 0, change: 0, error: 0, raw: 0, ready: 0, unlink: 0, unlinkDir: 0};
     watcher.on("all", strEvent=>{
