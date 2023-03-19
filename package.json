@@ -4,5 +4,8 @@
   "description": "Watch the directory for changes and update a signal file when a change occurs.",
   "main": "sig.js",
   "author": "Quinn Dirks",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.3"
+  }
 }
