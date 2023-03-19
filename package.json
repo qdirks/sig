@@ -1,0 +1,8 @@
+{
+  "name": "sig",
+  "version": "1.0.0",
+  "description": "Watch the directory for changes and update a signal file when a change occurs.",
+  "main": "sig.js",
+  "author": "Quinn Dirks",
+  "license": "ISC"
+}
