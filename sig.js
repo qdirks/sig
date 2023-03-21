@@ -23,10 +23,12 @@ function sig(ignored=[]) {
     const signalName = filename + "." + baseSignal + num + ".js";
 
     // create the chokidar watcher
+    let block = false;
     const watcher = chokidar.watch(directory, {ignored: [clientName, signalName, ".git", "node_modules"].concat(ignored)});
     let eventCount = 0;
     const changes = {add: 0, addDir: 0, all: 0, change: 0, error: 0, raw: 0, ready: 0, unlink: 0, unlinkDir: 0};
     watcher.on("all", strEvent=>{
+        if (block) return;
         changes[strEvent]++;
         eventCount++;
         so.cursorTo(0);
@@ -37,6 +39,7 @@ function sig(ignored=[]) {
             writeStr += `${c2 + kv[0]}=${terminal.FgYellow + kv[1] + c2}, `;
         });
         writeStr = writeStr.slice(0, -2) + terminal.Reset + " ";
+
         so.write(writeStr);
         fs.writeFile(signalName, writeSignal(eventCount), ()=>{});
     });
@@ -60,6 +63,7 @@ function sig(ignored=[]) {
     process.on("SIGINT", gracefulExit);
     process.on("SIGTERM", gracefulExit);
     function gracefulExit() {
+        block = true; // block the chokidar watcher from doing any more writes to stdout
         so.write(" graceful exit\n");
         let u1, u2;
         fs.unlink(signalName, ()=>{
