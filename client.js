@@ -6,8 +6,8 @@ setInterval(()=>{
     const script = document.createElement('script');
     script.src = src;
     if (window.location.search.startsWith("?")) {
-        if (!version) window.location = window.location.origin + window.location.pathname + window.location.search + "&" + query + "=0";
-    } else window.location = window.location.origin + window.location.pathname + "?" + query + "=0";
+        if (!version) window.location = window.location.protocol + '//' + window.location.pathname + window.location.search + "&" + query + "=0";
+    } else window.location = window.location.protocol + '//' + window.location.pathname + "?" + query + "=0";
     document.body.append(script);
     script.onload = ()=>{
         if (Number(version) === window[query]) return;
@@ -17,9 +17,9 @@ setInterval(()=>{
                 pv += cv;
                 return pv;
             }, '');
-            window.location = window.location.origin + window.location.pathname + "?" + query + "=" + window[query] + (search ? "&" + search : '');
+            window.location = window.location.protocol + '//' + window.location.pathname + "?" + query + "=" + window[query] + (search ? "&" + search : '');
         }
-        else window.location = window.location.origin + window.location.pathname + "?" + query + "=" + window[query];
+        else window.location = window.location.protocol + '//' + window.location.pathname + "?" + query + "=" + window[query];
     }
     script.remove();
 }, 1000);
