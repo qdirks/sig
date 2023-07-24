@@ -8,7 +8,7 @@ setInterval(()=>{
     if (window.location.search.startsWith("?")) {
         if (!version) window.location = window.location.protocol + '//' + window.location.pathname + window.location.search + "&" + query + "=0";
     } else window.location = window.location.protocol + '//' + window.location.pathname + "?" + query + "=0";
-    document.body.append(script);
+    document.children[0].append(script);
     script.onload = ()=>{
         if (Number(version) === window[query]) return;
         if (window.location.search) {
