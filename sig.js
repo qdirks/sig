@@ -62,6 +62,7 @@ function sig(ignored=[]) {
     // register the graceful exit handler
     process.on("SIGINT", gracefulExit);
     process.on("SIGTERM", gracefulExit);
+    process.on("SIGHUP", gracefulExit);
     function gracefulExit() {
         block = true; // block the chokidar watcher from doing any more writes to stdout
         so.write(" graceful exit\n");
