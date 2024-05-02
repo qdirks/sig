@@ -91,6 +91,7 @@ function sig(ignored=[]) {
     const c1 = terminal.FgBlue;
     const c2 = terminal.Reset + terminal.FgRed;
     console.log(`${c1} watching: ${terminal.Reset + furl.href} ${terminal.Reset}`);
+    writeEvents();
 }
 module.exports = sig;
 if (require.main === module) sig(process.argv.slice(2));
