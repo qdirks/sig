@@ -29,10 +29,7 @@ function sig(ignored=[]) {
     const watcher = chokidar.watch(directory, {ignored: _ign, ignoreInitial: true});
     let eventCount = 0;
     const changes = {add: 0, addDir: 0, all: 0, change: 0, error: 0, raw: 0, ready: 0, unlink: 0, unlinkDir: 0};
-    watcher.on("all", strEvent=>{
-        if (block) return;
-        changes[strEvent]++;
-        eventCount++;
+    const writeEvents = ()=>{
         so.cursorTo(0);
         so.clearLine(0);
 
@@ -43,6 +40,12 @@ function sig(ignored=[]) {
         writeStr = writeStr.slice(0, -2) + terminal.Reset + " ";
 
         so.write(writeStr);
+    }
+    watcher.on("all", strEvent=>{
+        if (block) return;
+        changes[strEvent]++;
+        eventCount++;
+        writeEvents();
         fs.writeFile(signalName, writeSignal(eventCount), ()=>{});
     });
 
