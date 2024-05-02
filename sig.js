@@ -26,7 +26,7 @@ function sig(ignored=[]) {
     let block = false;
     const _ign = [clientName, signalName, ".git", "node_modules"].concat(ignored);
     console.log("Ignoring:", _ign);
-    const watcher = chokidar.watch(directory, {ignored: _ign});
+    const watcher = chokidar.watch(directory, {ignored: _ign, ignoreInitial: true});
     let eventCount = 0;
     const changes = {add: 0, addDir: 0, all: 0, change: 0, error: 0, raw: 0, ready: 0, unlink: 0, unlinkDir: 0};
     watcher.on("all", strEvent=>{
