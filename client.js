@@ -1,4 +1,5 @@
-{
+(()=>{
+    if (window.location.protocol !== 'file:') return;
     const query = QUERY;
     const src = SIGNAL_SRC;
     let version = window.location.search.slice(1).split("&").find(str=>str.startsWith(query));
@@ -33,4 +34,4 @@
     });
     iframe.style.display = 'none';
     document.body.append(iframe);
-}
+})();
