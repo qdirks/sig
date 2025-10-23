@@ -33,5 +33,5 @@
         }, 1000);
     });
     iframe.style.display = 'none';
-    document.body.append(iframe);
+    document.head.append(iframe);
 })();
